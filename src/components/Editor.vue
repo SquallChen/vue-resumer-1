@@ -10,28 +10,39 @@
       </ol>
     </nav>
     <ol class="panes">
-      <!--&lt;!&ndash;<li v-for="i in [0,1,2,3,4,5]" v-bind:class="{active: currentTab === i}" >-->
-        <!--Tab {{i+1}}-->
-      <!--</li>&ndash;&gt;-->
       <li v-bind:class="{active: currentTab === 0}">
         <profileEditor v-bind:profile="profile"/>
       </li>
 
       <li v-bind:class="{active: currentTab === 1}">
-        <workHistoryEditor v-bind:workHistory="workHistory"/>
+        <ArrayEditor v-bind:items="workHistory" v-bind:labels="{company:'公司',content:'工作内容'}" v-bind:title="'工作经历'"/>
       </li>
 
       <li v-bind:class="{active: currentTab === 2}">
-        <studyHistoryEditor v-bind:items="studyHistory"/>
+        <ArrayEditor v-bind:items="studyHistory" v-bind:labels="{school:'学校',duration:'时间',degree:'学位'}" v-bind:title="'学习经历'"/>
       </li>
       <li v-bind:class="{active: currentTab === 3}">
-        <h2>项目经历</h2>
+        <ArrayEditor v-bind:items="projects" v-bind:labels="{name:'项目名称',content:'工作内容'}" v-bind:title="'项目经历'"/>
       </li>
       <li v-bind:class="{active: currentTab === 4}">
-        <h2>获奖情况</h2>
+        <ArrayEditor v-bind:items="awards" v-bind:labels="{name:'奖励详情'}" v-bind:title="'获奖情况'"/>
       </li>
       <li v-bind:class="{active: currentTab === 5}">
         <h2>联系方式</h2>
+        <el-form>
+          <el-form-item label="QQ">
+            <el-input v-model="contacts.qq"></el-input>
+          </el-form-item>
+          <el-form-item label="微信">
+            <el-input v-model="contacts.wechat"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱">
+            <el-input v-model="contacts.email"></el-input>
+          </el-form-item>
+          <el-form-item label="手机">
+            <el-input v-model="contacts.phone"></el-input>
+          </el-form-item>
+        </el-form>
       </li>
     </ol>
   </div>
@@ -39,17 +50,19 @@
 
 <script>
   import profileEditor from './profileEditor'
-  import workHistoryEditor from './workHistoryEditor'
-  import studyHistoryEditor from './studyHistoryEditor'
+  import ArrayEditor from './ArrayEditor'
   export default {
-      components:{ profileEditor,workHistoryEditor,studyHistoryEditor },
+      components:{ profileEditor,ArrayEditor},
     data(){
       return {
         currentTab: 0,
         icons: ['shenfenzheng', 'work', 'book', 'heartsurgery', 'jiangbei', 'phone'],
         profile:{name:'',city:'',birth:''},
         workHistory:[{company:'',content:''}],
-        studyHistory:[{school:'',duration:'',degree:''}]
+        studyHistory:[{school:'',duration:'',degree:''}],
+        projects:[{name:'',content:''}],
+        awards:[{name:''}],
+        contacts:[{qq:'',wechat:'',email:'',phone:''}]
       }
     },
     methods:{
