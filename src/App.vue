@@ -61,7 +61,7 @@ html, body, #app{ height: 100%; overflow: hidden; }
    fill: currentColor;
    overflow: hidden;
 }
-#App main{  
+main{
   display: flex;
   flex: 1;
   background: #DDD;
